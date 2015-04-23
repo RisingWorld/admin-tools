@@ -2,8 +2,9 @@
             /   RISING                                  WORLD    \
            |    _____________________________________________     |
            |   |                                             |    |
-           |   |  C:\> _          Z_SCRIPT v1.2              |    |
-           |   |     Author :     ZABKA                      |    |
+           |   |  C:\> _          Z_SCRIPT v1.3              |    |
+           |   |     Authors      ZABKA                      |    |
+           |   |                  yahgiggle                  |    |
            |   |                                             |    |
            |   |https://github.com/zabka14/Zcript-RisingWorld|    |
            |   |                                             |    |
@@ -27,7 +28,7 @@
 :-----------------------------------------------------------------------------:
 `---._.-----------------------------------------------------------------._.---'
 
-Last update : 23/01/2015
+Last update : 15/04/2015
 
  _________________________________________     
 |                                         |    
@@ -89,6 +90,6 @@ Arguments for the function are noted into <>.
 
 3) Contact
 
-Please fell free to report any bug on my GitHub : https://github.com/zabka14/Zcript-RisingWorld
+Please fell free to report any bug on the project's GitHub bug tracker : https://github.com/RisingWorld/admin-tools/
 Or you can also send me a Private Message on the official Rising World forum : https://forum.rising-world.net/index.php
 If you have any question, whant to ask me something, you can also contact me on my professional email : benjamin.vianey@etu.univ-nantes.fr
