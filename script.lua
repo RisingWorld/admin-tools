@@ -1,9 +1,9 @@
--- Copyright (c) 2015, Benjamin Vianey. This file is licensed under the
+--- Copyright (c) 2015, Benjamin Vianey. This file is licensed under the
 -- Affero General Public License version 3 or later. See the COPYRIGHT file.
-
 -- Original version, Hotscript is :
 -- Copyright (c) 2014, Jeffrey Clark. This file is licensed under the
 -- Affero General Public License version 3 or later. See the COPYRIGHT file.
+-- @author Benjamin "Zabka" Vianey and yahgiggle 
 
 include("support.lua")
 
@@ -24,7 +24,9 @@ yellLabel:setBorderThickness(4);
 yellLabel:setFontsize(30);
 yellLabel:setPivot(4);
 
-
+--- This function is called evrytime a player type something in the chat
+-- The function get the text typed by the user, if the first char of the string is a / then it explode the command using a space ' ' as delimiter 
+-- Then a based on what the first block on char is (cmd[1]), different function are called
 function onPlayerCommand(event)
     print(timePrefix{text=event.player:getName() .. ": "..event.command})
 
@@ -159,6 +161,157 @@ function onPlayerCommand(event)
                 target = server:findPlayerByID(cmd[2]);
             end
             kill(event.player, target)
+
+        -- TP admin -> player 
+        elseif cmd[1] == "/tp" then
+            local target;
+            -- Checking if admin :
+            if not event.player:isAdmin() then return msgAccessDenied(event.player) end
+            -- Checking if there's an argument
+            if not cmd[2] then return msgInvalidUsage(event.player) end
+            -- Checking if arg is a player ID OR a player name
+            if tonumber(cmd[2]) == nil then
+                -- here if cmd2's not a number
+                -- Checking if targeted player exist
+                 if not server:findPlayerByName(cmd[2]) then return msgBadID(event.player) end
+                target = server:findPlayerByName(cmd[2]);
+            else
+                -- Checking if targeted player exist
+                if not server:findPlayerByID(cmd[2]) then return msgBadID(event.player) end
+                target = server:findPlayerByID(cmd[2]);
+            end
+            tp(event.player, target)
+        
+
+        -- TP player -> admin
+        elseif cmd[1] == "/tp2" then
+            local target;
+            -- Checking if admin :
+            if not event.player:isAdmin() then return msgAccessDenied(event.player) end
+            -- Checking if there's an argument
+            if not cmd[2] then return msgInvalidUsage(event.player) end
+            -- Checking if arg is a player ID OR a player name
+            if tonumber(cmd[2]) == nil then
+                -- here if cmd2's not a number
+                -- Checking if targeted player exist
+                 if not server:findPlayerByName(cmd[2]) then return msgBadID(event.player) end
+                target = server:findPlayerByName(cmd[2]);
+            else
+                -- Checking if targeted player exist
+                if not server:findPlayerByID(cmd[2]) then return msgBadID(event.player) end
+                target = server:findPlayerByID(cmd[2]);
+            end
+            tp(target, event.player)
+
+
+
+        elseif cmd[1] == "/ban" then
+            if not event.player:isAdmin() then return msgAccessDenied(event.player) end
+            if not cmd[2] then return msgInvalidUsage(event.player) end
+            local args = explode(" ", cmd[2], 3)
+        if not args[1] or not args[2] or not args[3] then return msgInvalidUsage(event.player) end
+        ban(args[1], args[2], args[3], event.player)
+
+         elseif cmd[1] == "/unban" then
+            if not event.player:isAdmin() then return msgAccessDenied(event.player) end
+            if not cmd[2] then return msgInvalidUsage(event.player) end
+            unban(cmd[2], event.player)
+
+        elseif cmd[1] == "/setmotd" then
+            if not event.player:isAdmin() then return msgAccessDenied(event.player) end
+            if not cmd[2] then return msgInvalidUsage(event.player) end
+            setMotd(cmd[2])
+            event.player:sendTextMessage("[#00FFCC]motd set");
+
+        elseif cmd[1] == "/setwelcome" then
+            if not event.player:isAdmin() then return msgAccessDenied(event.player) end
+            if not cmd[2] then return msgInvalidUsage(event.player) end
+            setWelcome(cmd[2])
+            event.player:sendTextMessage("[#00FFCC]welcome set");
+
+
+
+            ----------------------------
+            --       For all          --
+            ----------------------------
+
+
+        elseif cmd[1] == "/yell" then
+            if not event.player:isAdmin() then return msgAccessDenied(event.player) end
+            if not cmd[2] then return msgInvalidUsage(event.player) end
+    
+            yellLabel:setText(" "..event.player:getName()..": "..cmd[2].." ");
+            yellLabel:setX(0.5);
+            yellLabel:setY(0.3);
+            yellLabel:setVisible(true)
+            setTimer(function()
+                    yellLabel:setVisible(false);
+            end, 5, 1);
+
+        elseif cmd[1] == "/last" then
+        sendTableMessage{player=event.player, messages=getLastText{name=cmd[2]}}
+
+
+        elseif cmd[1] == "/pos" then
+            local pos = event.player:getPosition();
+            event.player:sendTextMessage(pos)
+
+
+        elseif cmd[1] == "/whisper" then
+            if not cmd[2] then return msgInvalidUsage(event.player) end
+            local args = explode(" ", cmd[2], 2)
+            if not args[2] then return msgInvalidUsage(event.player) end
+    
+            local toPlayer = server:findPlayerByName(args[1])
+            if not toPlayer then return msgPlayerNotFound(event.player) end
+    
+            toPlayer:sendTextMessage(timePrefix{text="[#FFFF00](whisper) "..decoratePlayerName(event.player)..": "..args[2]});
+        end
+    end
+end
+            ---------------------------------------------------------------------
+            --           Effective command called by previous part             --
+            ---------------------------------------------------------------------
+            
+--- This function is used to kick a player, only admin can use it (refer to onPlayerCommand for more info about the call)
+-- @param kicker  Player Object, the admin who call the function 
+-- @param target  Player Object, the target of the kick 
+-- @param reason  A String that will be displayed on client kicked side (given to the playerobject:kick(x) function as param)
+
+function kickPlayer(kicker, target, reason)
+    local tName = target:getName()
+    target:kick(reason)
+    kicker:sendTextMessage("You kicked "..tName.." !")
+end
+
+--- Pretty self explanatory, this function set Thirst, Hunger and Health of a giver player to max value, and notice it to the targeted player
+-- Suggested by username on official forum ! 
+-- @param target PlayerObject, the target of the heal
+function heal(target)
+    local tName = target:getName()
+    target:setHealth(100);
+    target:setHunger(100);
+    target:setThirst(100);
+    target:sendTextMessage("You've been healed !")
+end
+
+
+function sendTableMessage(opts)
+    for i=1,#opts.messages do
+        opts.player:sendTextMessage(opts.messages[i])
+    end
+end
+
+
+--- The in-game API might already have a playerobject:kill() function, anyway, this one is setting health of the target to 0 (so it's kind of a "natural" dead)
+-- @param admin PlayerObject who called the function 
+-- @param player PlayerObject who is killed 
+function kill(admin, player)
+    local aName = admin:getName();
+    local pName = player:getName();
+    admin:sendTextMessage("Player "..pName.." as been killed by admin "..aName);
+    player:setHealth(0)
+end
 
         -- TP admin -> player 
         elseif cmd[1] == "/tp" then
