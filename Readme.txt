@@ -6,7 +6,7 @@
            |   |     Authors      ZABKA                      |    |
            |   |                  yahgiggle                  |    |
            |   |                                             |    |
-           |   |https://github.com/zabka14/Zcript-RisingWorld|    |
+           |   | https://github.com/RisingWorld/admin-tools/ |    |
            |   |                                             |    |
            |   |                                             |    |
            |   |                                             |    |
@@ -41,7 +41,7 @@ Last update : 15/04/2015
 1) Copyright and Licence
 
 Zcript is copyright Benjamin Vianey, 2015, and files herein are licensed under the Affero General Public License version 3, the text of which can
-be found in LICENSE, or any later version of the AGPL, unless otherwise noted. Attribution information is contained in the AUTHORS file.
+be found here <http://www.gnu.org/licenses/>, or any later version of the AGPL, unless otherwise noted.
 Zcript is based on H0tscript (by H0tw1r3), which is also under AGPL.
 
 
