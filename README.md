@@ -10,7 +10,7 @@ This script is an update of h0tw1r3 h0tsript. It gives server's admin more tools
 
 ## Installation
 
-So far, this module isn't using any depencies, but check this page ofter as we're planning to use some soon !
+So far, this module isn't using any depencies, but check this page often as we're planning to use some soon !
 
 ### Using Git
 
