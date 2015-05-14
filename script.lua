@@ -5,8 +5,9 @@
 -- Affero General Public License version 3 or later. See the COPYRIGHT file.
 -- @author Benjamin "Zabka" Vianey and yahgiggle 
 
+-- include folder and files needed for string word wrapper or else this wont work
 include("support.lua")
-
+include("string-ext/string-ext.lua");
 
 database = getDatabase()
 server = getServer()
