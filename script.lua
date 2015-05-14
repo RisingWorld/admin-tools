@@ -256,6 +256,19 @@ function onPlayerCommand(event)
             local pos = event.player:getPosition();
             event.player:sendTextMessage(pos)
 
+-- comment to user with word wrap added by yahgiggle /say username <text>	
+		elseif cmd[1] == "/say" then
+            if not cmd[2] then return msgInvalidUsage(event.player) end
+            local args = explode(" ", cmd[2], 2)
+            if not args[2] then return msgInvalidUsage(event.player) end
+    
+            local toPlayer = server:findPlayerByName(args[1])
+            if not toPlayer then return msgPlayerNotFound(event.player) end
+              		
+        local lines = string.wrap(args[2], 80, 3); server:brodcastTextMessage(timePrefix{text=" "..decoratePlayerName(event.player).."[#00FFCC] -> [#FFFC00]".. args[1] .."[#00FFCC]: [#FFA500]".. lines[1]}); for i = 2, #lines do server:brodcastTextMessage("[#FFA500]".. lines[i]); end;
+		
+
+
 
         elseif cmd[1] == "/whisper" then
             if not cmd[2] then return msgInvalidUsage(event.player) end
