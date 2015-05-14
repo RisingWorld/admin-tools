@@ -41,11 +41,13 @@ function onPlayerCommand(event)
             
         if cmd[1] == "/help" then
                 event.player:sendTextMessage("[#00FFCC]/ahelp [#00CC88] Display admin help");
-                event.player:sendTextMessage("[#00FFCC]/zhelp [#00CC88] Display common help");
+                event.player:sendTextMessage("[#00FFCC]/phelp [#00CC88] Display common help for users");
+		event.player:sendTextMessage("[#00FFCC]/chelp [#00CC88] Display common help for the command console");
                -- event.player:sendTextMessage("[#00FFCC]/ghelp [#00CC88] Display group management help");
 
         elseif cmd[1] == "/ahelp" then
             if event.player:isAdmin() then
+                
                 event.player:sendTextMessage("[#00FFCC]/ban [#00CC88]<player> <duration in minutes, -1 is permenant> <reason>");
                 event.player:sendTextMessage("[#00FFCC]/unban [#00CC88]<player>");
                 event.player:sendTextMessage("[#00FFCC]/setWelcome [#00CC88]<message>");
@@ -56,47 +58,32 @@ function onPlayerCommand(event)
                 event.player:sendTextMessage("[#00FFCC]/tp2 [#00CC88] <ID> OR <player name>");
                 event.player:sendTextMessage("[#00FFCC]/kick [#00CC88] <player ID> <reason>");
                 event.player:sendTextMessage("[#00FFCC]/heal [#00CC88] <player ID or name>");
-
+                				
             else
-                event.player:sendTextMessage("[#00FFCC]You're not an admin !");
+                event.player:sendTextMessage("[#00FFCC]Sorry You're not an admin ! please use /phelp");
             end
 
-       -- elseif cmd[1] == "/ghelp" then
-       --         event.player:sendTextMessage("[#00FFCC]/gkick [#00CC88] <playerID> OR <player Name> ");
-       --         event.player:sendTextMessage("[#00FFCC]/gadd [#00CC88] <playerID> OR <player Name> ");
-       --         event.player:sendTextMessage("[#00FFCC]/g [#00CC88] <message> ");
-       --         event.player:sendTextMessage("[#00FFCC]/gsetAdmin [#00CC88] <playerID> OR <player Name> ");
+    
 
 
-        elseif cmd[1] == "/zhelp" then
+        elseif cmd[1] == "/phelp" then
             event.player:sendTextMessage("[#00FFCC]/last [#00CC88][player]");
-            event.player:sendTextMessage("[#00FFCC]/whisper [#00CC88]<player> <message>");
+            event.player:sendTextMessage("[#00FFCC]/whisper [#00CC88]<player> <message> Whisper to one user");
             event.player:sendTextMessage("[#00FFCC]/pos");
+            event.player:sendTextMessage("[#00FFCC]/say [#00CC88] Username <Text>  talks out loud to one user and wraps the text");
+            event.player:sendTextMessage("[#00FFCC]/wap [#00CC88] <Text> talks out loud and wraps the text");
 
-
-
+			
+	elseif cmd[1] == "/chelp" then	
+		event.player:sendTextMessage("[#FFA500]To Enter the command console hit the ` or ~ keys for Mac users it maybe the ^ key");
+	        event.player:sendTextMessage("[#00FFCC]setgametype 1 [#00CC88] This sets the game to creative mode");
+		event.player:sendTextMessage("[#00FFCC]setgametype 0 [#00CC88] This sets the game to survive mode");
+		event.player:sendTextMessage("[#00FFCC]clearworldparts[#00CC88] This can help if the game starts to lag");
+		event.player:sendTextMessage("[#00FFCC]fps [#00CC88] This Shows the FPS");
             ---------------------------------------------------------------------
             --             Calling command based on console entry              --
             ---------------------------------------------------------------------
-            
-            ----------------------------
-            --     Group Management   --
-            ----------------------------
-   --     elseif cmd[1] == "/gkick" then
 
-
-    --    elseif cmd[1] == "/gadd" then
-
-
-  --      elseif cmd[1] == "/g" then
-
-
-  --      elseif cmd[1] == "/gsetAdmin" then    
-
-
-            ----------------------------
-            --       For Admin        --
-            ----------------------------
 
 
         elseif cmd[1] == "/test" then
@@ -257,7 +244,8 @@ function onPlayerCommand(event)
             local pos = event.player:getPosition();
             event.player:sendTextMessage(pos)
 
-        -- comment to a user out loud with word wrap added by yahgiggle /say username <text>	
+        -- comment to a user out loud with word wrap added by yahgiggle /say username <text>
+        --start
 		elseif cmd[1] == "/say" then
             if not cmd[2] then return msgInvalidUsage(event.player) end
             local args = explode(" ", cmd[2], 2)
@@ -268,15 +256,18 @@ function onPlayerCommand(event)
               		
         local lines = string.wrap(args[2], 80, 3); server:brodcastTextMessage(timePrefix{text=" "..decoratePlayerName(event.player).."[#00FFCC] -> [#FFFC00]".. args[1] .."[#00FFCC]: [#FFA500]".. lines[1]}); 
         for i = 2, #lines do server:brodcastTextMessage("[#FFA500]".. lines[i]); end;
+	--end
+	
 		
         -- comment out loud and have your text wrap /wap <text> added by yahgiggle
+        --start
         elseif cmd[1] == "/wap" then
             -- if not cmd[2] then return msgInvalidUsage(event.player) end          
             if not cmd[2] then return msgInvalidUsage(event.player) end
             
         local lines = string.wrap(cmd[2], 60, 3); server:brodcastTextMessage(timePrefix{text=" "..decoratePlayerName(event.player).."[#00FFCC] Says: [#FFA500]".. lines[1]});
-		for i = 2, #lines do server:brodcastTextMessage("[#FFA500]".. lines[i]); end;
-
+	for i = 2, #lines do server:brodcastTextMessage("[#FFA500]".. lines[i]); end;
+        --end
 
         elseif cmd[1] == "/whisper" then
             if not cmd[2] then return msgInvalidUsage(event.player) end
