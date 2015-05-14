@@ -51,6 +51,14 @@ Here's a list of all the commands added by Zcript and a kick explanation.
 All thoose commands must be typed directly into the game chat (by pressing T by default).
 Arguments for the function are noted into <>.
 
+/help see all help options
+
+/ahelp see all admin help options
+
+/phelp see all player help options
+
+/chelp see all command console help options
+
 /ban <player> <duration in minutes, -1 is permenant> <reason>   EXEMPLE /ban Zabka 60 troll
   Self explanatory. Is an improvement of the in game function, allowing you you to ban disconnected players !
 
