@@ -2,8 +2,8 @@
   <Name>Zcript</Name>
   <Description>Admin Tools to help you do admin stuff</Description>
   <File>script.lua</File>
-  <Author>Zabka and h0tw1r3</Author>
-  <Team></Team>
-  <Website></Website>
+  <Author>Zabka, h0tw1r3, Lordfoobay, and yahgiggle</Author>
+  <Team>RisingWorld</Team>
+  <Website>https://github.com/RisingWorld</Website>
   <License>GNU AGPL V3</License>
 </Lua-Script>
