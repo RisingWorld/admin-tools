@@ -87,7 +87,10 @@ Arguments for the function are noted into <>.
   This command return the position along 3 axis of the player : X,Y,Z
 
 /say   
-  talk to other users out loud use /say username <text> also will wrap the centances 
+Talk out loud to a User, also this will wrap the text so it does not go off screen. /say username <text>
+  
+/wap 
+Talk out loud and have the text wrap so it does not go off screen. /wap <text>
 
 
 3) Contact
