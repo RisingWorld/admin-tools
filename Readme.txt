@@ -86,6 +86,8 @@ Arguments for the function are noted into <>.
 /pos    EXEMPLE /pos
   This command return the position along 3 axis of the player : X,Y,Z
 
+/say   
+  talk to other users out loud use /say username <text> also will wrap the centances 
 
 
 3) Contact
