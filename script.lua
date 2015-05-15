@@ -66,20 +66,35 @@ function onPlayerCommand(event)
     
 
 
+        -- phelp updated by yahgiggle
+	--start
         elseif cmd[1] == "/phelp" then
             event.player:sendTextMessage("[#00FFCC]/last [#00CC88][player]");
             event.player:sendTextMessage("[#00FFCC]/whisper [#00CC88]<player> <message> Whisper to one user");
             event.player:sendTextMessage("[#00FFCC]/pos");
             event.player:sendTextMessage("[#00FFCC]/say [#00CC88] Username <Text>  talks out loud to one user and wraps the text");
             event.player:sendTextMessage("[#00FFCC]/wap [#00CC88] <Text> talks out loud and wraps the text");
-
-			
+        --end
+		
+	-- chelp added by yahgiggle
+	--start
 	elseif cmd[1] == "/chelp" then	
 		event.player:sendTextMessage("[#FFA500]To Enter the command console hit the ` or ~ keys for Mac users it maybe the ^ key");
-	        event.player:sendTextMessage("[#00FFCC]setgametype 1 [#00CC88] This sets the game to creative mode");
+                event.player:sendTextMessage("[#00FFCC]setgametype 1 [#00CC88] This sets the game to creative mode");
 		event.player:sendTextMessage("[#00FFCC]setgametype 0 [#00CC88] This sets the game to survive mode");
 		event.player:sendTextMessage("[#00FFCC]clearworldparts[#00CC88] This can help if the game starts to lag");
 		event.player:sendTextMessage("[#00FFCC]fps [#00CC88] This Shows the FPS");
+	--end
+		
+	-- key help added by yahgiggle
+	--start
+        elseif cmd[1] == "/khelp" then
+		local bkey = "f2 = fly on fly off, k = Compass, L = Lights on, f is the function key to open doors and pick things up, Please note this does not work in fly mode,";
+		    
+		for k,line in pairs(string.wrap(bkey, 60, 3)) do; event.player:sendTextMessage("[#FFA500]".. line); end;
+	--end	
+	
+	
             ---------------------------------------------------------------------
             --             Calling command based on console entry              --
             ---------------------------------------------------------------------
